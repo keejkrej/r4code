@@ -23,6 +23,8 @@ The native desktop shell will be built on [Rune](https://github.com/anomalyco/ru
 | Delegation | Working local path | Active-parent child creation, atomic lineage, result transfer, status/cancel tools |
 | Tool calls and approvals | Working tested paths | Command/file/dynamic tool nodes and items, native accept/decline responses, denied-write regression |
 | Remote control plane | Shared (`/Users/jack/workspace/t3code-control-plane`) | Shares the TypeScript Tailscale-first control plane across `g0code` and `r4code` |
+| Control-plane client + connect-token verifier (`src/controlplane`) | Library ready, not wired | Protocol v1 pairing/heartbeat/GUI client, JWKS cache, `DeviceAuthorizer` (401/403 + scope gating); all shared test vectors pass and HTTP flows are tested against a local test server, not yet against a deployed control plane |
+| Device daemon (heartbeat loop + authenticated Tailscale listener) | Not started | `r4code-mcp` remains stdio-only; nothing calls `DeviceAuthorizer` yet |
 | Rune desktop GUI | Next slice | To be built on `https://github.com/anomalyco/rune` |
 
 ## Run the MCP interface
