@@ -27,6 +27,7 @@ The pinned source is upstream `https://github.com/pingdotgg/t3code` (mirrored th
 3. **Local CLI Provider Adapters (`src/orchestration/cli/`)**: Native multi-turn adapters for Codex (`codex app-server`), Claude Code (`claude` streaming Agent SDK query protocol), Pi (`pi --mode rpc` with blocking permission extension), Agy (`agy acp`), and Fx (`fx acp`). Includes fixture-backed parity tests against recorded `t3code v0.1.7` transcripts.
 4. **Standalone MCP Server (`src/orchestration/mcp/` & `src/bin/r4code-mcp.rs`)**: Stdio JSON-RPC 2.0 MCP server exposing provider capabilities, thread creation/read/list/send/wait/interrupt, atomic parent/child task delegation, and live runtime-request responses.
 5. **Shared Control Plane (`/Users/jack/workspace/t3code-control-plane`)**: The remote device registry and Tailscale-first control plane remain shared in TypeScript (`/Users/jack/workspace/t3code-control-plane/README.md`) rather than duplicated in Rust.
+   - **Control-plane client/verifier (`src/controlplane/`)**: Rust implementation of the shared protocol v1 (`t3code-control-plane/protocol/PROTOCOL.md`): device Ed25519 identity, pairing and heartbeat client, GUI client-authorization/device/connect-token client, JWKS cache, and the device-side connect-token verifier/authorizer, checked against the shared `test-vectors.json`. The device daemon (heartbeat loop and an authenticated network listener for the MCP surface) is not wired up yet; `r4code-mcp` is still stdio-only.
 6. **Desktop GUI Target ([Rune](https://github.com/anomalyco/rune))**: The next layer will bind `Orchestrator`, `SqliteStore`, and `cli::Executor` directly to a Rune GUI shell.
 
 ## Implemented in this slice
@@ -46,6 +47,7 @@ The pinned source is upstream `https://github.com/pingdotgg/t3code` (mirrored th
 - Durable SQLite events, receipts, and leased effect outbox with restart/recovery tests (`sqlite/mod.rs`).
 - Local CLI adapters for Codex, Claude Code, Pi, Agy (ACP), and Fx (ACP), with fixture-backed parity tests (`cli/`).
 - Standalone MCP server (`src/bin/r4code-mcp.rs` and `src/orchestration/mcp/mod.rs`).
+- Control-plane protocol v1 client and connect-token verifier (`src/controlplane/`, see [`src/controlplane/README.md`](src/controlplane/README.md)); library only, not yet used by a daemon or GUI.
 
 ### Public seams
 
